@@ -10,3 +10,13 @@
 #MainPage .img-row img {
   width: 100%;
 }
+@media screen and (max-width: 400px) {
+  #MainPage .img-row {
+    width: 100%;
+  }
+}
+@media screen and (min-width: 800px) {
+  #MainPage .img-row {
+    width: 33.33333%;
+  }
+}
