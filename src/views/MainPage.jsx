@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom'
 import GlobalActions from '../actions/GlobalActions'
 import GlobalStores,{ActionEvents,DataEvents} from '../stores/GlobalStores'
-import ScrollView from '../utils/ScrollView'
 
 import {environment} from 'react-router-component'
 
