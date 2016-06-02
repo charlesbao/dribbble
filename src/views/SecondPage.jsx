@@ -17,9 +17,12 @@ class MainPage extends React.Component{
         console.log(this.state.content)
         return (
             <section id="SecondPage">
-                <div>
+                <div className="img-box" style={{
+                    height:document.body.clientHeight - 50
+                }}>
                     <img src={this.state.content.bigImage} />
                 </div>
+                <div className="action-bar" onClick={this.backHandle}>返回</div>
             </section>
         )
     }

@@ -70,7 +70,8 @@ class MainPage extends React.Component{
         let content = this.dribbbleContent;
         let arr = [];
         let length = content.length;
-        for(let i in content){
+        loadNew.bind(this,0)();
+        function loadNew(i){
             let theImage = new Image();
             theImage.src = content[i].image.normal;
             theImage.onload = loadComplete.bind(this,content[i]);
@@ -81,15 +82,12 @@ class MainPage extends React.Component{
         }
         function loadComplete(data){
             arr.push(data);
-            if(arr.length % 6 == 0){
-                this.setState({
-                    dribbbleContent:arr
-                })
-            }else if(arr.length == length){
+            if(arr.length % 2 == 0 || arr.length == length){
                 this.setState({
                     dribbbleContent:arr
                 })
             }
+            if(arr.length != length)loadNew.bind(this,arr.length)()
         }
     }
 
@@ -122,7 +120,7 @@ class MainPage extends React.Component{
     clickHandle(data){
         GlobalStores.setStoreData(DataEvents.SCROLL,ReactDOM.findDOMNode(this.refs.page).scrollTop);
         GlobalStores.setStoreData(DataEvents.DETAIL,data);
-        environment.hashEnvironment.navigate('/SecondPage',function(err){})
+        environment.hashEnvironment.navigate('/SecondPage',{transitionName:'push-right'},function(err){})
     }
 }
 
