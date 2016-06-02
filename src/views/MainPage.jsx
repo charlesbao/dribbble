@@ -31,6 +31,7 @@ class MainPage extends React.Component{
     }
 
     getDribbble(){
+
         this.setState({
             dribbbleContent:GlobalStores.getActionResult(ActionEvents.GET_DRIBBBLE_EVENT)
         })
@@ -67,7 +68,9 @@ class MainPage extends React.Component{
         let dribbbleContent = this.state.dribbbleContent;
         let arr = [];
         if(dribbbleContent){
-            for(let each of dribbbleContent){
+            alert(dribbbleContent.length)
+            for(let i in dribbbleContent){
+                let each = dribbbleContent[i];
                 let image = each.image.normal;
                 let url = each.url.target;
                 let bigImage = each.image.big;
