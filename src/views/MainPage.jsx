@@ -15,6 +15,7 @@ class MainPage extends React.Component{
             dribbbleContent:GlobalStores.getActionResult(ActionEvents.GET_DRIBBBLE_EVENT),
             height: this.calcWidth() * (3/4)
         }
+        this.dribbbleContent = []
     }
 
     componentDidMount(){
@@ -31,10 +32,11 @@ class MainPage extends React.Component{
     }
 
     getDribbble(){
-
-        this.setState({
-            dribbbleContent:GlobalStores.getActionResult(ActionEvents.GET_DRIBBBLE_EVENT)
-        })
+        this.dribbbleContent = GlobalStores.getActionResult(ActionEvents.GET_DRIBBBLE_EVENT);
+        this.loadImage();
+        // this.setState({
+        //     dribbbleContent:GlobalStores.getActionResult(ActionEvents.GET_DRIBBBLE_EVENT)
+        // })
     }
 
     calcWidth(){
@@ -64,6 +66,33 @@ class MainPage extends React.Component{
         )
     }
 
+    loadImage(){
+        let content = this.dribbbleContent;
+        let arr = [];
+        let length = content.length;
+        for(let i in content){
+            let theImage = new Image();
+            theImage.src = content[i].image.normal;
+            theImage.onload = loadComplete.bind(this,content[i]);
+            theImage.onerror = loadError.bind(this);
+        }
+        function loadError(){
+            length --
+        }
+        function loadComplete(data){
+            arr.push(data);
+            if(arr.length % 6 == 0){
+                this.setState({
+                    dribbbleContent:arr
+                })
+            }else if(arr.length == length){
+                this.setState({
+                    dribbbleContent:arr
+                })
+            }
+        }
+    }
+
     renderDribbble(){
         let dribbbleContent = this.state.dribbbleContent;
         let arr = [];
@@ -80,7 +109,7 @@ class MainPage extends React.Component{
                          style={{
                             height:this.state.height
                          }}>
-                        <img src={image} />
+                        <img src={image} onload={this.loadImage} />
                         <span className="mask">{image.lastIndexOf('.gif') != -1 ? 'GIF':'PNG'}</span>
                     </div>
                 );
