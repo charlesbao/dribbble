@@ -12,13 +12,14 @@ class MainPage extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            dribbbleContent:GlobalStores.getActionResult(ActionEvents.GET_DRIBBBLE_EVENT)
+            dribbbleContent:GlobalStores.getActionResult(ActionEvents.GET_DRIBBBLE_EVENT),
+            height: this.calcWidth() * (3/4)
         }
     }
 
     componentDidMount(){
         GlobalStores.addChangeListener(ActionEvents.GET_DRIBBBLE_EVENT,this.getDribbble.bind(this));
-
+        window.onresize = this.resize.bind(this);
         if(!this.state.dribbbleContent)GlobalActions.getDribbble();
         if(GlobalStores.getStoreData(DataEvents.SCROLL)){
             ReactDOM.findDOMNode(this.refs.page).scrollTop = GlobalStores.getStoreData(DataEvents.SCROLL)
@@ -32,6 +33,24 @@ class MainPage extends React.Component{
     getDribbble(){
         this.setState({
             dribbbleContent:GlobalStores.getActionResult(ActionEvents.GET_DRIBBBLE_EVENT)
+        })
+    }
+
+    calcWidth(){
+        let width = document.body.clientWidth;
+        if(width <= 400){
+            width = width
+        }else if(width >= 800){
+            width = width / 3
+        }else{
+            width = width /2
+        }
+        return width
+    }
+    resize(){
+
+        this.setState({
+            height: this.calcWidth() * (3/4)
         })
     }
 
@@ -55,8 +74,12 @@ class MainPage extends React.Component{
                 let dom = (
                     <div className="img-row"
                          key={arr.length} href={url}
-                         onClick={this.clickHandle.bind(this,{url,bigImage})}>
+                         onClick={this.clickHandle.bind(this,{url,bigImage})}
+                         style={{
+                            height:this.state.height
+                         }}>
                         <img src={image} />
+                        <span className="mask">{image.lastIndexOf('.gif') != -1 ? 'GIF':'PNG'}</span>
                     </div>
                 );
                 arr.push(dom)

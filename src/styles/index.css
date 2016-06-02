@@ -7,6 +7,9 @@ body,
   height: 100%;
   position: relative;
 }
+.router {
+  overflow: hidden;
+}
 .router > section {
   position: absolute;
   background: white;

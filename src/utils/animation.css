@@ -11,12 +11,12 @@
     animation: moveInRight 0.6s both;
 }
 .push-right-leave {
-    -webkit-animation: moveOutLeft 0.6s both;
-    animation: moveOutLeft 0.6s both;
+    -webkit-animation: moveOutLeft 0.5s both;
+    animation: moveOutLeft 0.5s both;
 }
 .pop-right-enter {
-    -webkit-animation: moveInLeft 0.6s both;
-    animation: moveInLeft 0.6s both;
+    -webkit-animation: moveInLeft 0.5s both;
+    animation: moveInLeft 0.5s both;
 }
 .pop-right-leave {
     -webkit-animation: moveOutRight 0.6s both;
