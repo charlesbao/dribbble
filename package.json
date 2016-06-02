@@ -1,11 +1,11 @@
 {
-  "name": "reactinit",
+  "name": "dribbble",
   "version": "1.0.0",
-  "description": "React init by es6",
+  "description": "dribbble React by es6",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/charlesbao/reactinit"
+    "url": "https://github.com/charlesbao/dribbble"
   },
   "entry": {
     "index": "./src/entry/App.jsx"
