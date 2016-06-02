@@ -68,7 +68,6 @@ class MainPage extends React.Component{
         let dribbbleContent = this.state.dribbbleContent;
         let arr = [];
         if(dribbbleContent){
-            alert(dribbbleContent.length)
             for(let i in dribbbleContent){
                 let each = dribbbleContent[i];
                 let image = each.image.normal;
